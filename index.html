@@ -43,7 +43,7 @@
     transition: all 0.3s ease;
   }
 
-  #btnFijo {
+  #btnSi {
     background-color: #4CAF50;
     color: white;
     top: 50%;
@@ -51,7 +51,7 @@
     transform: translate(-50%, -50%);
   }
 
-  #btnEscapista {
+  #btnNo {
     background-color: #f44336;
     color: white;
     top: 20%;
@@ -61,15 +61,14 @@
 </head>
 <body>
 
-<h1>¿Quieres ir a quitar chupones a los olivos de moñina?</h1>
+<h1>¿Quieres ir a quitar los chupones de los olivos a Moñina?</h1>
 <div class="button-container">
-  <button id="btnFijo" onclick="teletransporta()">Sí</button>
-  <button id="btnEscapista">No</button>
+  <button id="btnSi" onclick="alert('¡Pringado/a! 😄')">Sí</button>
+  <button id="btnNo">No</button>
 </div>
 
 <script>
-  const btnEscapista = document.getElementById('btnEscapista');
-  const btnFijo = document.getElementById('btnFijo');
+  const btnNo = document.getElementById('btnNo');
   const container = document.querySelector('.button-container');
 
   function moverBotonRandom(boton) {
@@ -86,16 +85,17 @@
     boton.style.top = randomY + 'px';
   }
 
-  // Botón escapista huye al acercarse
-  btnEscapista.addEventListener('mouseover', () => {
-    moverBotonRandom(btnEscapista);
+  // Botón No se teletransporta cada vez que se intenta pulsar
+  btnNo.addEventListener('click', (e) => {
+    e.preventDefault(); // evita cualquier acción por defecto
+    moverBotonRandom(btnNo);
   });
 
-  // Botón fijo se teletransporta al pulsarlo
-  function teletransporta() {
-    alert('¡Pringado/a! 😄');
-    moverBotonRandom(btnFijo);
-  }
+  // También se mueve si el dedo se acerca en móvil
+  btnNo.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    moverBotonRandom(btnNo);
+  });
 </script>
 
 </body>
