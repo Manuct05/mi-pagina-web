@@ -40,7 +40,7 @@
     border-radius: 10px;
     cursor: pointer;
     position: absolute;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
   }
 
   #btnSi {
@@ -78,20 +78,26 @@
     const maxX = containerRect.width - btnRect.width;
     const maxY = containerRect.height - btnRect.height;
 
-    const randomX = Math.floor(Math.random() * maxX);
-    const randomY = Math.floor(Math.random() * maxY);
+    let randomX = Math.floor(Math.random() * maxX);
+    let randomY = Math.floor(Math.random() * maxY);
+
+    // Evita que quede casi en la misma posición
+    while (Math.abs(randomX - btnRect.left) < 10 && Math.abs(randomY - btnRect.top) < 10) {
+      randomX = Math.floor(Math.random() * maxX);
+      randomY = Math.floor(Math.random() * maxY);
+    }
 
     boton.style.left = randomX + 'px';
     boton.style.top = randomY + 'px';
   }
 
-  // Botón No se teletransporta cada vez que se intenta pulsar
-  btnNo.addEventListener('click', (e) => {
-    e.preventDefault(); // evita cualquier acción por defecto
+  // Botón No se teletransporta antes de que se pulse
+  btnNo.addEventListener('mousedown', (e) => {
+    e.preventDefault();
     moverBotonRandom(btnNo);
   });
 
-  // También se mueve si el dedo se acerca en móvil
+  // Para pantallas táctiles
   btnNo.addEventListener('touchstart', (e) => {
     e.preventDefault();
     moverBotonRandom(btnNo);
