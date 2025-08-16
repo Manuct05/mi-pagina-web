@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quien te preguntó</title>
+<title>Pregunta Trampa Ultra Difícil</title>
 <style>
   body {
     display: flex;
@@ -40,7 +40,7 @@
     border-radius: 10px;
     cursor: pointer;
     position: absolute;
-    transition: all 0.2s ease;
+    transition: all 0.2s ease, background-color 0.3s ease;
   }
 
   #btnSi {
@@ -89,15 +89,36 @@
 
     boton.style.left = randomX + 'px';
     boton.style.top = randomY + 'px';
+
+    // Cambia color aleatoriamente para que sea más divertido
+    const randomColor = `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`;
+    boton.style.backgroundColor = randomColor;
   }
 
-  // Botón No se teletransporta antes de que se pulse
+  // Función que detecta la cercanía del cursor o touch
+  function huirSiCerca(e) {
+    const botonRect = btnNo.getBoundingClientRect();
+    const x = e.clientX || e.touches[0].clientX;
+    const y = e.clientY || e.touches[0].clientY;
+
+    const distanciaX = Math.abs(x - (botonRect.left + botonRect.width/2));
+    const distanciaY = Math.abs(y - (botonRect.top + botonRect.height/2));
+    const distancia = Math.sqrt(distanciaX**2 + distanciaY**2);
+
+    if (distancia < 100) { // si el cursor/finger está cerca
+      moverBotonRandom(btnNo);
+    }
+  }
+
+  // Eventos para huir al acercarse
+  document.addEventListener('mousemove', huirSiCerca);
+  document.addEventListener('touchmove', huirSiCerca, {passive: false});
+
+  // Teletransportarse si intentas tocarlo
   btnNo.addEventListener('mousedown', (e) => {
     e.preventDefault();
     moverBotonRandom(btnNo);
   });
-
-  // Para pantallas táctiles
   btnNo.addEventListener('touchstart', (e) => {
     e.preventDefault();
     moverBotonRandom(btnNo);
