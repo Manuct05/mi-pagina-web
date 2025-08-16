@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Responsiva</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f4f8;
+      color: #333;
+    }
+
+    header {
+      background: #4a90e2;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* --- NAVBAR --- */
+    nav {
+      background: #357ab8;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* --- BOTÓN HAMBURGUESA (solo móvil) --- */
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* --- CONTENIDO --- */
+    main {
+      padding: 20px;
+    }
+
+    section {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #4a90e2;
+      color: white;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+      }
+
+      nav a {
+        margin: 10px 0;
+        display: block;
+      }
+
+      .menu-toggle {
+        display: block;
+        margin: 0 auto;
+      }
+
+      nav.active {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bienvenido a Mi Página de Manuel</h1>
+    <p>Versión responsiva con menú móvil 📱</p>
+  </header>
+
+  <!-- Botón hamburguesa -->
+  <button class="menu-toggle">☰ Menú</button>
+
+  <!-- Menú -->
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#">Sobre mí</a>
+    <a href="#">Contacto</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Sobre mí</h2>
+      <p>Hola, soy estudiante de programación y esta es mi primera página con HTML, CSS y un poco de JavaScript.</p>
+    </section>
+
+    <section>
+      <h2>Mis hobbies</h2>
+      <ul>
+        <li>Programar</li>
+        <li>Jugar videojuegos</li>
+        <li>Escuchar música</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Una imagen</h2>
+      <img src="https://via.placeholder.com/400x200" alt="Imagen de ejemplo" style="max-width:100%; border-radius: 10px;">
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Mi Primera Página Web</p>
+  </footer>
+
+  <!-- Script para abrir/cerrar el menú en móvil -->
+  <script>
+    const toggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector("nav");
+
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("active");
+    });
+  </script>
+</body>
+</html>
